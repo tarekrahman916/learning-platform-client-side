@@ -1,13 +1,28 @@
 import React, { useContext } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Image } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
+import { FaUserAlt } from "react-icons/fa";
 
 const Header = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleSignOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((err) => console.error(err));
+  };
+
+  const renderTooltip = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      {user?.email}
+    </Tooltip>
+  );
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
@@ -31,12 +46,45 @@ const Header = () => {
             </Link>
           </Nav>
           <Nav>
-            <p className="text-white me-2">{user.displayName}</p>
-            <Link to="/login">
-              <Button className="btn" variant="primary" size="sm">
-                Login
+            {/* <OverlayTrigger
+              placement="left"
+              delay={{ show: 250, hide: 400 }}
+              overlay={renderTooltip}
+            >
+              <button className="bg-transparent border rounded me-2 w-100 p-1">
+                <FaUserAlt className="fs-4 text-white"></FaUserAlt>
+              </button>
+            </OverlayTrigger> */}
+            {user?.photoURL && (
+              <OverlayTrigger
+                placement="left"
+                delay={{ show: 250, hide: 400 }}
+                overlay={renderTooltip}
+              >
+                <Image
+                  className="me-2"
+                  style={{ width: "40px" }}
+                  rounded
+                  src={user.photoURL}
+                />
+              </OverlayTrigger>
+            )}
+            {user && user?.uid ? (
+              <Button
+                onClick={handleSignOut}
+                className="btn"
+                variant="primary"
+                size="sm"
+              >
+                Logout
               </Button>
-            </Link>
+            ) : (
+              <Link to="/login">
+                <Button className="btn" variant="primary" size="sm">
+                  Login
+                </Button>
+              </Link>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
