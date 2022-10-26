@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 
 const Header = () => {
+  const { user } = useContext(AuthContext);
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
         <Link className="navbar-brand" to="/">
-          React-Bootstrap
+          Techno Academy
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
@@ -29,7 +31,7 @@ const Header = () => {
             </Link>
           </Nav>
           <Nav>
-            <p className="text-white me-2">More deets</p>
+            <p className="text-white me-2">{user.displayName}</p>
             <Link to="/login">
               <Button className="btn" variant="primary" size="sm">
                 Login

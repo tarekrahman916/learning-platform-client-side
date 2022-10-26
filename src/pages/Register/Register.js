@@ -1,10 +1,43 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { FaBeer, FaGithub, FaGoogle } from "react-icons/fa";
+
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 
 const Register = () => {
+  const [error, setError] = useState("");
+
+  const { createUser } = useContext(AuthContext);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const photoURL = form.photoURL.value;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    //validation password
+
+    if (password.length < 8) {
+      setError("Password should be at 8 character");
+      return;
+    }
+    if (!/(?=.*[!@#$&*])/.test(password)) {
+      setError("Please Provide at least one special character");
+      return;
+    }
+    setError("");
+
+    createUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        form.reset();
+      })
+      .catch((err) => setError(err.message));
+  };
   return (
     <div
       style={{ width: "400px" }}
@@ -12,27 +45,47 @@ const Register = () => {
     >
       <h3 className="text-white">Register</h3>
       <hr className="border " />
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicName">
           <Form.Label>Name</Form.Label>
-          <Form.Control type="text" placeholder="Your name" />
+          <Form.Control
+            name="name"
+            type="text"
+            placeholder="Your name"
+            required
+          />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPhotoURL">
           <Form.Label>Photo URL</Form.Label>
-          <Form.Control type="text" placeholder="Photo URL" />
+          <Form.Control
+            name="photoURL"
+            type="text"
+            placeholder="Photo URL"
+            required
+          />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" />
+          <Form.Control
+            name="email"
+            type="email"
+            placeholder="Enter email"
+            required
+          />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
+          <Form.Control
+            name="password"
+            type="password"
+            placeholder="Password"
+            required
+          />
         </Form.Group>
-        <p className="text-danger">Err</p>
+        <p className="text-danger">{error}</p>
         <Button className="w-100 p-2" variant="primary" type="submit">
           Login
         </Button>
