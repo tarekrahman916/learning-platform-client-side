@@ -30,7 +30,7 @@ const Header = () => {
           </Nav>
           <Nav>
             <p className="text-white me-2">More deets</p>
-            <Link>
+            <Link to="/login">
               <Button className="btn" variant="primary" size="sm">
                 Login
               </Button>
