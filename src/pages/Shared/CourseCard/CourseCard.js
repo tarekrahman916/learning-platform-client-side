@@ -7,12 +7,12 @@ const CourseCard = ({ course }) => {
   const { id, img, name, description } = course;
 
   return (
-    <div>
-      <Card style={{ width: "18rem" }}>
+    <div className="col-md-6 col-lg-4 mb-3 ">
+      <Card>
         <Card.Img
           variant="top"
           src={img}
-          class="img-fluid rounded-top"
+          class="img-fluid rounded-top "
           alt=""
         />
 
