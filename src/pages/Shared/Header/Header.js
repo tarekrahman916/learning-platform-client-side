@@ -20,7 +20,7 @@ const Header = () => {
 
   const renderTooltip = (props) => (
     <Tooltip id="button-tooltip" {...props}>
-      {user?.email}
+      {user?.displayName}
     </Tooltip>
   );
   return (
@@ -46,29 +46,22 @@ const Header = () => {
             </Link>
           </Nav>
           <Nav>
-            {/* <OverlayTrigger
-              placement="left"
-              delay={{ show: 250, hide: 400 }}
-              overlay={renderTooltip}
-            >
-              <button className="bg-transparent border rounded me-2 w-100 p-1">
-                <FaUserAlt className="fs-4 text-white"></FaUserAlt>
-              </button>
-            </OverlayTrigger> */}
-            {user?.photoURL && (
-              <OverlayTrigger
-                placement="left"
-                delay={{ show: 250, hide: 400 }}
-                overlay={renderTooltip}
-              >
-                <Image
-                  className="me-2"
-                  style={{ width: "40px" }}
-                  rounded
-                  src={user.photoURL}
-                />
-              </OverlayTrigger>
-            )}
+            <div className="text-center mb-2 mb-lg-0">
+              {user?.photoURL && (
+                <OverlayTrigger
+                  placement="left"
+                  delay={{ show: 250, hide: 400 }}
+                  overlay={renderTooltip}
+                >
+                  <Image
+                    className="me-2 text-center"
+                    style={{ width: "40px" }}
+                    roundedCircle
+                    src={user.photoURL}
+                  />
+                </OverlayTrigger>
+              )}
+            </div>
             {user && user?.uid ? (
               <Button
                 onClick={handleSignOut}
