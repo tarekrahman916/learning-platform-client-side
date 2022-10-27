@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import { FaUserAlt } from "react-icons/fa";
+import logo from "../../../assets/images/logo.png";
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -27,6 +27,12 @@ const Header = () => {
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
         <Link className="navbar-brand" to="/">
+          <Image
+            roundedCircle
+            className="m-0 p-0"
+            style={{ width: "80px" }}
+            src={logo}
+          />
           Techno Academy
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />

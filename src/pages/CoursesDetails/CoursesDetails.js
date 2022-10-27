@@ -12,10 +12,10 @@ const CoursesDetails = () => {
   const { id, img, name, description, features, price } = course;
 
   return (
-    <div className="p-5 mx-md-5">
+    <div className="p-5 mx-md-5 ">
       <Card className="">
-        <Card.Header className="d-flex justify-content-between">
-          <p>Featured</p>
+        <Card.Header className="d-flex justify-content-between mx-lg-5">
+          <p>Course Details</p>
 
           <Pdf targetRef={ref} filename="download.pdf">
             {({ toPdf }) => (

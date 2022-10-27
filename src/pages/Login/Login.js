@@ -1,15 +1,20 @@
-import { GoogleAuthProvider } from "firebase/auth";
+import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import React, { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { FaGithub, FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
+
+const googleProvider = new GoogleAuthProvider();
+const githubProvider = new GithubAuthProvider();
 
 const Login = () => {
   const [error, setError] = useState("");
-  const { signIn, providerLogin } = useContext(AuthContext);
-  const googleProvider = new GoogleAuthProvider();
+  const { signIn, providerLogin, setLoading } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,8 +28,12 @@ const Login = () => {
         const user = result.user;
         console.log(user);
         form.reset();
+        navigate(from, { replace: true });
       })
-      .catch((err) => setError(err.message));
+      .catch((err) => setError(err.message))
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const googleSignIn = () => {
@@ -32,8 +41,25 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        navigate(from, { replace: true });
       })
-      .catch((err) => setError(err.message));
+      .catch((err) => setError(err.message))
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const githubSignIn = () => {
+    providerLogin(githubProvider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        navigate(from, { replace: true });
+      })
+      .catch((err) => setError(err.message))
+      .finally(() => {
+        setLoading(false);
+      });
   };
   return (
     <div
@@ -74,7 +100,7 @@ const Login = () => {
           <button onClick={googleSignIn} className="btn text-white ">
             <FaGoogle className="text-white fs-2" />
           </button>
-          <button className="btn text-white ">
+          <button onClick={githubSignIn} className="btn text-white ">
             <FaGithub className="text-white fs-2" />
           </button>
         </div>
