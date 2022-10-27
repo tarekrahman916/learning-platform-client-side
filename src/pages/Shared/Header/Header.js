@@ -47,8 +47,8 @@ const Header = () => {
             <Link className="nav-link" to="/blog">
               Blog
             </Link>
-            <Link className="nav-link" to="/about">
-              About
+            <Link className="nav-link" to="/faqs">
+              FAQS
             </Link>
           </Nav>
           <Nav>
