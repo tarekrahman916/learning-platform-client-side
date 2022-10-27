@@ -10,6 +10,7 @@ const CourseCard = ({ course }) => {
     <div className="col-md-6 col-lg-4 mb-3 ">
       <Card>
         <Card.Img
+          style={{ height: "200px" }}
           variant="top"
           src={img}
           className="img-fluid rounded-top "
@@ -18,7 +19,7 @@ const CourseCard = ({ course }) => {
 
         <Card.Body>
           <Card.Title>{name}</Card.Title>
-          <Card.Text>{description}</Card.Text>
+          <Card.Text>{description.slice(0, 100)}...</Card.Text>
 
           <Link to={`/course/${id.toString()}`}>
             <Button variant="primary">See Details</Button>
