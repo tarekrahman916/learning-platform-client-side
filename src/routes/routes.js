@@ -16,7 +16,11 @@ export const routes = createBrowserRouter([
     path: "/",
     element: <Main></Main>,
     children: [
-      { path: "/", element: <Home /> },
+      {
+        path: "/",
+        element: <Home />,
+        loader: () => fetch("http://localhost:5000/courses"),
+      },
       {
         path: "/courses",
         element: <CoursesLayout></CoursesLayout>,

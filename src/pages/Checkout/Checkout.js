@@ -11,7 +11,7 @@ const Checkout = () => {
   return (
     <div
       style={{ width: "600px" }}
-      className=" mx-auto bg-dark p-3 mt-3 rounded shadow text-white"
+      className=" mx-auto bg-dark p-3 mt-3 rounded shadow text-white mb-3"
     >
       <Form>
         <h3>
