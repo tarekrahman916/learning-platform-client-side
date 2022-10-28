@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Image } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -8,9 +8,11 @@ import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import logo from "../../../assets/images/logo.png";
+import DarkModeToggle from "react-dark-mode-toggle";
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const handleSignOut = () => {
     logOut()
@@ -23,6 +25,7 @@ const Header = () => {
       {user?.displayName}
     </Tooltip>
   );
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
@@ -71,20 +74,32 @@ const Header = () => {
             {user && user?.uid ? (
               <Button
                 onClick={handleSignOut}
-                className="btn"
+                className="btn p-2"
                 variant="primary"
-                size="sm"
+                size="md"
               >
                 Logout
               </Button>
             ) : (
               <Link to="/login">
-                <Button className="btn" variant="primary" size="sm">
+                <Button className="btn p-0" variant="primary p-2" size="md">
                   Login
                 </Button>
               </Link>
             )}
           </Nav>
+          <div className="d-flex ms-lg-3 mt-3 mt-lg-0">
+            <DarkModeToggle
+              onChange={setIsDarkMode}
+              checked={isDarkMode}
+              size={60}
+            />
+            {isDarkMode ? (
+              <p className="text-white ms-2">Dark</p>
+            ) : (
+              <p className="text-white ms-2">Light</p>
+            )}
+          </div>
         </Navbar.Collapse>
       </Container>
     </Navbar>

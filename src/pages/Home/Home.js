@@ -31,7 +31,7 @@ const Home = () => {
               alt="Second slide"
             />
             <Carousel.Caption>
-              <h3>Second slide label</h3>
+              <h3>Learn With Us</h3>
             </Carousel.Caption>
           </Carousel.Item>
         </Carousel>

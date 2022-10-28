@@ -19,7 +19,10 @@ export const routes = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
-        loader: () => fetch("http://localhost:5000/courses"),
+        loader: () =>
+          fetch(
+            "https://b610-lerning-platform-server-side-ecru.vercel.app/courses"
+          ),
       },
       {
         path: "/courses",
@@ -28,7 +31,10 @@ export const routes = createBrowserRouter([
           {
             path: "/courses",
             element: <Courses></Courses>,
-            loader: () => fetch("http://localhost:5000/courses"),
+            loader: () =>
+              fetch(
+                "https://b610-lerning-platform-server-side-ecru.vercel.app/courses"
+              ),
           },
         ],
       },
@@ -40,7 +46,9 @@ export const routes = createBrowserRouter([
         path: "/course/:id",
         element: <CoursesDetails></CoursesDetails>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/course/${params.id}`),
+          fetch(
+            `https://b610-lerning-platform-server-side-ecru.vercel.app/course/${params.id}`
+          ),
       },
       {
         path: "/checkout/:id",
@@ -50,7 +58,9 @@ export const routes = createBrowserRouter([
           </PrivateRoutes>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/course/${params.id}`),
+          fetch(
+            `https://b610-lerning-platform-server-side-ecru.vercel.app/course/${params.id}`
+          ),
       },
     ],
   },

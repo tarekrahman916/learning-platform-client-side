@@ -10,7 +10,7 @@ const Faqs = () => {
         <h1>FAQS</h1>
       </div>
       <div className="container my-3">
-        <div className="row">
+        <div className="row ">
           <div className="col-md-6">
             <Accordion defaultActiveKey="0">
               <Accordion.Item eventKey="0">

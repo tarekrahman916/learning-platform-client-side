@@ -6,6 +6,8 @@ import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 
 const Checkout = () => {
   const { user } = useContext(AuthContext);
+  console.log(user);
+
   const course = useLoaderData();
   const { name, price } = course;
   return (
@@ -18,27 +20,31 @@ const Checkout = () => {
           Your purses course <span className="fs-1 fw-bold">{name}</span>
         </h3>
         <hr />
-        <Form.Group className="mb-3" controlId="formBasicName">
-          <Form.Label>Name</Form.Label>
-          <Form.Control
-            className="text-black"
-            readOnly
-            value={user.displayName}
-            type="text"
-            placeholder={user.displayName}
-          />
-        </Form.Group>
+        {user?.displayName && (
+          <Form.Group className="mb-3" controlId="formBasicName">
+            <Form.Label>Name</Form.Label>
+            <Form.Control
+              className="text-black"
+              readOnly
+              value={user.displayName}
+              type="text"
+              placeholder={user.displayName}
+            />
+          </Form.Group>
+        )}
 
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            className="text-black"
-            readOnly
-            value={user.email}
-            type="text"
-            placeholder={user.displayName}
-          />
-        </Form.Group>
+        {user?.email && (
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              className="text-black"
+              readOnly
+              value={user.email}
+              type="text"
+              placeholder={user.displayName}
+            />
+          </Form.Group>
+        )}
 
         <Form.Group className="mb-3" controlId="formBasicPrice">
           <Form.Label>Price</Form.Label>

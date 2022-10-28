@@ -6,7 +6,7 @@ const CoursesSideBar = () => {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/courses")
+    fetch("https://b610-lerning-platform-server-side-ecru.vercel.app/courses")
       .then((res) => res.json())
       .then((data) => setCourses(data))
       .catch((err) => console.error(err));

@@ -64,7 +64,7 @@ const Login = () => {
   return (
     <div
       style={{ width: "400px" }}
-      className=" mx-auto bg-dark p-3 mt-3 rounded shadow text-white"
+      className=" mx-auto bg-dark p-3 my-3 rounded shadow text-white"
     >
       <h3 className="text-white">Login</h3>
       <hr className="border " />

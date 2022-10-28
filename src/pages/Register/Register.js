@@ -7,7 +7,6 @@ import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 
 const Register = () => {
   const [error, setError] = useState("");
-
   const { createUser, updateUserProfile } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
@@ -34,8 +33,8 @@ const Register = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
-        form.reset();
         handleUpdateUserProfile(name, photoURL);
+        form.reset();
       })
       .catch((err) => setError(err.message));
   };
@@ -53,17 +52,17 @@ const Register = () => {
   return (
     <div
       style={{ width: "400px" }}
-      className=" mx-auto bg-dark p-3 mt-3 rounded shadow text-white"
+      className=" mx-auto bg-dark p-3 my-3 rounded shadow text-white"
     >
       <h3 className="text-white">Register</h3>
       <hr className="border " />
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicName">
-          <Form.Label>Name</Form.Label>
+          <Form.Label>Full Name</Form.Label>
           <Form.Control
             name="name"
             type="text"
-            placeholder="Your name"
+            placeholder="Your full name"
             required
           />
         </Form.Group>
